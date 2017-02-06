@@ -94,10 +94,15 @@ def get_brands_summary():
                                      Model.name,
                                      Model.year).join(Model).all()
 
-    # I am stuck on this one, I am pulling the correct information but don't know
-    # how to print out the items grouped by brand with one query.
+    brand_models = {}
 
-    print brand_summary
+    for item in brand_summary:
+        if item[0] in brand_models:
+            brand_models[item[0]].append(item[1:])
+        else:
+            brand_models[item[0]] = [item[1:]]
+
+    print brand_models
 
 
 def search_brands_by_name(mystr):
